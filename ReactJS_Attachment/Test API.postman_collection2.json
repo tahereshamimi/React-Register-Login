@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "c804f45d-3473-424b-a7aa-7f2ddc03d8aa",
+		"name": "Test API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register with mobile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-localization",
+						"value": "fa"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mobile",
+							"value": "09372281262",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "user",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://drimo.org/api/v1/auth",
+					"protocol": "https",
+					"host": [
+						"drimo",
+						"org"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-localization",
+						"value": "fa"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mobile",
+							"value": "{{mobile}}",
+							"type": "text"
+						},
+						{
+							"key": "_method",
+							"value": "PUT",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://drimo.org/api/v1/auth",
+					"protocol": "https",
+					"host": [
+						"drimo",
+						"org"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-localization",
+						"value": "fa"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mobile",
+							"value": "{{mobile}}",
+							"type": "text"
+						},
+						{
+							"key": "_method",
+							"value": "PUT",
+							"type": "text"
+						},
+						{
+							"key": "verification",
+							"value": "3673",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://drimo.org/api/v1/auth",
+					"protocol": "https",
+					"host": [
+						"drimo",
+						"org"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserInfo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-localization",
+						"value": "fa"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "https://drimo.org/api/v1/user",
+					"protocol": "https",
+					"host": [
+						"drimo",
+						"org"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
