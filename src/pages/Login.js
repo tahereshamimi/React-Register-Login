@@ -3,6 +3,8 @@ import { userService } from '../services/user'
 import { connect } from 'react-redux'
 import { loginSuccess, setMobile } from '../redux/actions';
 import { Container, Row, Col, Card, Button } from "react-bootstrap"
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 // login when have registered before
 // it just need mobile number and send otp to number
@@ -17,7 +19,7 @@ function Login(props) {
                 //   props.loginSuccess(res.data);
                 props.history.push('/otp')
             })
-            .catch(()=>{
+            .catch(() => {
                 props.history.push('/')
             })
 
@@ -29,20 +31,35 @@ function Login(props) {
             <Container>
                 <Row>
                     <Col lg={{ span: 6, offset: 3 }}>
-                        <Card>
-                            <Card.Body>
-                                <form onSubmit={(e) => { loginRequest(e, loginInfo) }}>
-                                    <p className="h4 text-center mb-4"> ورود</p>
-                                    <label htmlFor="phoneNumber" className="grey-text">
-                                        موبایل
-                                    </label>
-                                    <input type="number" id="phoneNumber" className="form-control" onChange={(e) => setLoginInfo({ mobile: e.target.value })} />
-                                    <br />
+                        <Card className={"full-height"}>
+                            <Card.Body className={"flex-position"}>
+                                <div>
+                                    <form onSubmit={(e) => { loginRequest(e, loginInfo) }}>
+                                        <h4 className="text-center mb-4">Login</h4>
+                                        <hr />
+                                        <h4 className="text-center">what is your mobile number?</h4>
+                                        <br />
 
+                                        <PhoneInput
+                                            disableCountryCode={true}
+                                            inputClass={"w-100 mobileInput"}
+                                            country={'ir'}
+                                            placeholder="Mobile number"
+                                            onlyCountries={['ir']}
+                                            // value={registerInfo}
+                                            onChange={(mobile) => setLoginInfo({ mobile })}
+                                        />
+                                        <br />
+
+
+                                    </form>
+                                </div>
+                                <div>
                                     <div className="text-center mt-4">
-                                        <Button color="indigo" type="submit">درخواست کد</Button>
+                                        <button className={"submitButton"} type="submit" onClick={(e) => { loginRequest(e, loginInfo) }}>Request Code</button>
                                     </div>
-                                </form>
+                                </div>
+
                             </Card.Body>
                         </Card>
                     </Col>

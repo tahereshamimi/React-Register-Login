@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { userService } from '../services/user';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Card, Button } from "react-bootstrap"
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import OtpInput from 'react-otp-input';
 
 
 // get otp and send request to verify
@@ -22,19 +23,35 @@ function OtpComponent(props) {
     <Container>
       <Row>
         <Col lg={{ span: 6, offset: 3 }}>
-          <Card>
-            <Card.Body>
-              <form onSubmit={(e) => { sendOtp(e) }}>
-                <p className="h4 text-center mb-4">رمز یکبار مصرف</p>
-                <label htmlFor="otp" className="grey-text">
-                  کد
-                </label>
-                <input type="number" id="opt" className="form-control" onChange={(e) => setOtp(e.target.value)} />
+          <Card className={"full-height"}>
+            <Card.Body className={"flex-position"}>
+              <div>
+                <form onSubmit={(e) => { sendOtp(e) }}>
+                  <p className="h4 text-center mb-4">Verification code</p>
+                  <hr />
+                  <h4 className="text-center">Enter verification code</h4>
+                  <br />
+                  <p className={"text-center"}>we just send a verification code to <br /> {props.mobile}</p>
+                  <br />
+                  {/* <input type="number" id="opt" className="form-control" onChange={(e) => setOtp(e.target.value)} /> */}
+                  <OtpInput
+                    containerStyle={"otp-container"}
+                    inputStyle={"otp-input"}
+                    value={otp}
+                    onChange={(code) => setOtp(code)}
+                    numInputs={4}
+                    separator={<span> </span>}
+                  />
 
+
+                </form>
+              </div>
+              <div>
                 <div className="text-center mt-4">
-                  <Button color="indigo" type="submit">ارسال</Button>
+                  <button className={"submitButton"} type="submit" onClick={(e) => { sendOtp(e) }}>Send</button>
                 </div>
-              </form>
+              </div>
+
             </Card.Body>
           </Card>
         </Col>
@@ -45,7 +62,7 @@ function OtpComponent(props) {
 
 const mapStateToProps = state => {
   return {
-
+    mobile: state.mobile
   }
 }
 const mapDispatchToProps = dispatch => {

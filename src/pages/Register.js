@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { userService } from '../services/user'
 import { connect } from 'react-redux'
 import { registerSuccess, setMobile } from '../redux/actions'
-import { Container, Row, Col, Card ,Button} from "react-bootstrap"
-import {Link} from 'react-router-dom'
+import { Container, Row, Col, Card, Button } from "react-bootstrap"
+import { Link } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 function Register(props) {
   const [registerInfo, setRegisterInfo] = useState({ name: '', mobile: '' })
@@ -29,28 +31,42 @@ function Register(props) {
       <Container>
         <Row>
           <Col lg={{ span: 6, offset: 3 }}>
-            <Card>
-              <Card.Body>
-                <form onSubmit={(e) => { registerRequest(e, registerInfo) }}>
-                  <p className="h4 text-center mb-4">ثبت نام</p>
-                  <label htmlFor="phoneNumber" className="grey-text">
-                    موبایل
-                  </label>
-                  <input type="number" id="phoneNumber" className="form-control" onChange={(e) => setRegisterInfo({ ...registerInfo, mobile: e.target.value })} />
-                  <br />
-                  <label htmlFor="name" className="grey-text">
-                    نام
-                  </label>
-                  <input type="test" id="name" className="form-control" onChange={(e) => setRegisterInfo({ ...registerInfo, name: e.target.value })} />
+            <Card className={"full-height"}>
+              <Card.Body className={"flex-position"}>
+                <div>
+                  <form onSubmit={(e) => { registerRequest(e, registerInfo) }}>
+                    <p className="h4 text-center mb-4">Let's get started</p>
+                    <hr />
+                    <h4 className="text-center">what is your mobile number?</h4>
+                    <br />
+                    {/* <input type="number" id="phoneNumber" className="form-control" onChange={(e) => setRegisterInfo({ ...registerInfo, mobile: e.target.value })} /> */}
+                    <PhoneInput
+                      disableCountryCode={true}
+                      inputClass={"w-100 mobileInput"}
+                      country={'ir'}
+                      placeholder="Mobile number"
+                      onlyCountries={['ir']}
+                      // value={registerInfo}
+                      onChange={(mobile) => setRegisterInfo({ ...registerInfo, mobile })}
+                    />
+                    <br />
+
+                    <input placeholder="Name" type="test" id="name" className="form-control mobileInput" onChange={(e) => setRegisterInfo({ ...registerInfo, name: e.target.value })} />
+
+                    <br />
+                    <div>
+                      Registered before?
+                    <Link to="/login">Login</Link>
+                    </div>
+                    {/* <Link to="/login">login</Link> */}
+                  </form>
+                </div>
+                <div>
                   <div className="text-center mt-4">
-                    <Button variant="primary" type="submit">Register</Button>
+                    <button className={"submitButton"} type="submit" onClick={(e) => { registerRequest(e, registerInfo) }}>Continue</button>
                   </div>
-                  <div>
-                    اگر ثبت نام کرده اید
-                    <Link to="/login">وارد شوید</Link>
-                  </div>
-                  {/* <Link to="/login">login</Link> */}
-                </form>
+                </div>
+
               </Card.Body>
             </Card>
           </Col>

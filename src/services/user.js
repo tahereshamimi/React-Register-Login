@@ -41,7 +41,7 @@ function confirmOTP(otp){ //login
         url:'https://drimo.org/api/v1/auth',
         method: 'POST',
         data: {
-            mobile,
+            mobile:'09126505468',
             _method:'PUT',
             verification:otp
         }
